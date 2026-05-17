@@ -1,3 +1,6 @@
+---
+title: WhatsApp网页版登录官方入口 | whatsapp网页版登录
+---
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -34,10 +37,17 @@
         .article-content p { margin-bottom: 20px; text-indent: 2em; text-align: justify; font-size: 16px; }
 
         /* 文章列表：只显示标题 */
-        .widget-title { font-size: 18px; font-weight: bold; margin-bottom: 20px; color: var(--main-green); border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .widget-title { font-size: 18px; font-weight: bold; margin-bottom: 20px; color: var(--main-green); border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 0; }
         .post-list { list-style: none; padding: 0; margin: 0; }
-        .post-item { display: block; padding: 12px 0; border-bottom: 1px solid #eee; text-decoration: none; color: #444; font-size: 15px; transition: 0.3s; }
+        .post-list li { border-bottom: 1px solid #eee; }
+        .post-list li:last-child { border-bottom: none; }
+        .post-item { display: block; padding: 12px 5px; text-decoration: none; color: #444; font-size: 15px; transition: 0.3s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .post-item:hover { color: var(--accent-green); padding-left: 8px; background: #fafafa; }
+
+        /* “查看更多” 侧边栏整合样式 */
+        .more-articles-sidebar-wrap { margin-top: 20px; padding-top: 15px; border-top: 1px dashed #eee; text-align: center; }
+        .more-articles-btn { display: block; padding: 10px; background: var(--main-green); color: #fff !important; text-decoration: none; font-size: 14px; font-weight: bold; border-radius: 6px; transition: 0.3s; }
+        .more-articles-btn:hover { background: var(--accent-green); transform: translateY(-1px); }
 
         /* 随机互链区域 */
         .footer-links { background: #fff; margin-top: 50px; padding: 40px 20px; border-top: 1px solid #eee; text-align: center; }
@@ -45,7 +55,9 @@
         .link-group a { text-decoration: none; color: #555; background: #f0f2f1; padding: 6px 16px; border-radius: 20px; font-size: 14px; transition: 0.3s; }
         .link-group a:hover { background: var(--main-green); color: #fff; }
 
-        @media (max-width: 900px) { .home-container { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) { 
+            .home-container { grid-template-columns: 1fr; } 
+        }
     </style>
 
     <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
@@ -58,6 +70,7 @@
 </header>
 
 <div class="home-container">
+    <!-- 左侧主栏卡片 -->
     <main class="content-card">
         <article class="article-content">
             <h2 style="border:none; padding:0; margin-top:0;">2026年最新解读：whatsapp网页版登录 的安全性与高效应用</h2>
@@ -72,34 +85,45 @@
             <p>总结而言，掌握 <strong>whatsapp网页版登录</strong> 的正确方式，不仅是为了通讯便捷，更是为了在竞争激烈的市场中保持信息的高度对称。我们将持续为您带来关于 <strong>whatsapp官方</strong> 的最新功能测评。</p>
         </article>
     </main>
-<aside class="sidebar-box">
-    <h3 class="widget-title">最新动态更新</h3>
-    <ul class="post-list">
-        {# 使用 reverse 确保最新的文章排在最上面 #}
-        {% for post in collections.blog | reverse %}
-        <li>
-            <a href="{{ post.url }}" class="post-item">{{ post.data.title }}</a>
-        </li>
-        {% else %}
-        <li style="color:red;">后台暂无标记为 'blog' 的文章，请检查 tags 标签。</li>
-        {% endfor %}
-    </ul>
-</aside>
 
+    <!-- 🎯 右侧侧边栏卡片：完美修复样式名与内部标签结构 -->
+    <aside class="sidebar-card">
+        <h3 class="widget-title">最新动态更新</h3>
+        <ul class="post-list">
+            <!-- 11ty 动态渲染列表页逻辑开始 -->
+            {% set count = 0 %}
+            {% for post in collections.blog | reverse %}
+                {% if count < 5 %}
+                    <li>
+                        <a href="{{ post.url }}" class="post-item" title="{{ post.data.title }}">{{ post.data.title }}</a>
+                    </li>
+                    {% set count = count + 1 %}
+                {% endif %}
+            {% else %}
+                <li style="color: #999; padding: 10px; font-size: 14px;">暂无更新内容</li>
+            {% endfor %}
+            <!-- 11ty 动态渲染列表页逻辑结束 -->
+        </ul>
 
+        <!-- 查看更多更新按钮：完美内嵌于卡片底部 -->
+        <div class="more-articles-sidebar-wrap">
+            <a href="/blog/" class="more-articles-btn">查看更多更新 &raquo;</a>
+        </div>
+    </aside>
+</div> <!-- .home-container 完美在此闭合 -->
+
+<!-- 页脚区域：独立出外部大框架，确保满宽白底排版对齐 -->
 <footer class="footer-links">
     <strong>推荐资源：</strong>
     <div class="link-group" id="random-links">
-                <a href="https://qhqrl.com">whatsapp網頁版下载</a>
-                <a href="https://ctysd.cn">whats网页版登入</a>
-                <a href="https://qvfdc.com">WhatsApp 網頁版</a>
-                <a href="https://rcqry.com">whatapp web</a>
-                <a href="https://rdqjm.com">whatsapp在线登陆</a>
+        <a href="https://qhqrl.com">whatsapp網頁版下载</a>
+        <a href="https://ctysd.cn">whats网页版登入</a>
+        <a href="https://qvfdc.com">WhatsApp 網頁版</a>
+        <a href="https://rcqry.com">whatapp web</a>
+        <a href="https://rdqjm.com">whatsapp在线登陆</a>
     </div>
     <p style="margin-top: 30px; font-size: 12px; color: #bbb;">&copy; 2026 qhsdk.com 版权所有 | 专业的 whatsapp 资讯平台</p>
 </footer>
-
-
 
 </body>
 </html>
