@@ -8,15 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }} - WhatsApp官方技术支持</title>
     <meta name="keywords" content="whatsapp网页版登录, whatsapp官方, whatsapp网页版登入, whatapp web">
+    
+    <meta name="description" content="{{ description or '提供专业的whatsapp网页版登录及官方安全通讯指南。' }}">
+    
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #222; margin: 0; background: #fff; }
         .wrapper { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        
+        /* 🎯 优化内页公共页头样式 */
         header { border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 30px; }
-        header a { text-decoration: none; color: #000; font-weight: 800; font-size: 20px; }
+        .header-logo { text-decoration: none; color: #000; font-weight: 800; font-size: 20px; display: inline-block; }
         
-        h1 { font-size: 32px; margin-bottom: 15px; color: #111; }
+        h1 { font-size: 32px; margin-bottom: 15px; color: #111; font-weight: bold; }
         
-        /* 🎯 列表页导航（面包屑）专属样式 */
         .breadcrumb-nav { font-size: 14px; color: #888; margin-bottom: 25px; padding-bottom: 10px; border-bottom: 1px dashed #f0f0f0; }
         .breadcrumb-nav a { color: #007aff; text-decoration: none; font-weight: 500; }
         .breadcrumb-nav a:hover { text-decoration: underline; }
@@ -25,7 +29,6 @@
         .content h2 { font-size: 24px; margin-top: 40px; border-bottom: 2px solid #eee; padding-bottom: 5px; }
         .content p { margin-bottom: 20px; }
 
-        /* 完美对齐的导航 */
         .post-nav { display: flex; justify-content: space-between; border-top: 1px solid #eee; margin-top: 50px; padding-top: 30px; }
         .post-nav a { text-decoration: none; color: #007aff; font-weight: 500; font-size: 15px; }
         .post-nav a:hover { text-decoration: underline; }
@@ -39,12 +42,11 @@
 </head>
 <body>
     <div class="wrapper">
-        <header><a href="/">QHSDK 通讯中心</a></header>
+        <header><a href="/" class="header-logo">QHSDK 通讯中心</a></header>
         
         <article>
             <h1>{{ title }}</h1>
             
-            <!-- 🎯 核心升级：面包屑列表页导航（极大提升整站内链权重，引导蜘蛛回爬列表） -->
             <div class="breadcrumb-nav">
                 当前位置：<a href="/">首页入口</a> &gt; <a href="/blog/">文章列表页</a> &gt; 正文内容
             </div>
@@ -59,7 +61,7 @@
                 {% if prevPost %}<a href="{{ prevPost.url }}">← {{ prevPost.data.title }}</a>{% endif %}
             </div>
             <div>
-                {% if nextPost %}<a href="{{ nextPost.url }}">{{ nextPost.data.title }} →</a>{% endif %}
+                 {% if nextPost %}<a href="{{ nextPost.url }}">{{ nextPost.data.title }} →</a>{% endif %}
             </div>
         </nav>
 
