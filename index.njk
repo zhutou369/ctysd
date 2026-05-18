@@ -17,22 +17,17 @@ title: WhatsApp网页版登录官方入口 | whatsapp网页版登录
         body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; color: #333; margin: 0; background: var(--bg-gray); }
         
         header { background: var(--main-green); color: white; padding: 40px 0; text-align: center; border-bottom: 4px solid var(--accent-green); }
-        header h1 { margin: 0; font-size: 28px; }
+        /* 🎯 优化：让 div 容器完美继承原先 h1 的视觉大字号效果 */
+        header .logo-text { margin: 0; font-size: 28px; font-weight: bold; color: white; }
 
-        .home-container {
-            display: grid;
-            grid-template-columns: 1fr 320px;
-            gap: 30px;
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
-            align-items: start;
-        }
+        .home-container { display: grid; grid-template-columns: 1fr 320px; gap: 30px; max-width: 1200px; margin: 30px auto; padding: 0 20px; align-items: start; }
 
         /* 主内容区排版 */
         .content-card { background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.05); }
         .sidebar-card { background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
 
+        /* 🎯 锁死主标题 h1 样式 */
+        .article-content h1 { color: var(--main-green); font-size: 26px; margin-top: 0; margin-bottom: 25px; font-weight: bold; }
         .article-content h2 { color: var(--main-green); font-size: 22px; margin-top: 30px; border-left: 5px solid var(--accent-green); padding-left: 15px; }
         .article-content p { margin-bottom: 20px; text-indent: 2em; text-align: justify; font-size: 16px; }
 
@@ -55,9 +50,7 @@ title: WhatsApp网页版登录官方入口 | whatsapp网页版登录
         .link-group a { text-decoration: none; color: #555; background: #f0f2f1; padding: 6px 16px; border-radius: 20px; font-size: 14px; transition: 0.3s; }
         .link-group a:hover { background: var(--main-green); color: #fff; }
 
-        @media (max-width: 900px) { 
-            .home-container { grid-template-columns: 1fr; } 
-        }
+        @media (max-width: 900px) { .home-container { grid-template-columns: 1fr; } }
     </style>
 
     <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
@@ -66,16 +59,15 @@ title: WhatsApp网页版登录官方入口 | whatsapp网页版登录
 <body>
 
 <header>
-    <h1>QHSDK 通讯技术支持中心</h1>
+    <div class="logo-text">QHSDK 通讯技术支持中心</div>
 </header>
 
 <div class="home-container">
-    <!-- 左侧主栏卡片 -->
     <main class="content-card">
         <article class="article-content">
-            <h2 style="border:none; padding:0; margin-top:0;">2026年最新解读：whatsapp网页版登录 的安全性与高效应用</h2>
+            <h1>2026年最新解读：whatsapp网页版登录 的安全性与高效应用</h1>
             <p>在跨国协作日益频繁的 2026 年，<strong>whatsapp网页版登录</strong> 已经成为企业和个人实现无障碍沟通的核心。通过 <strong>whatsapp官方</strong> 提供的多设备连接方案，我们可以轻松实现 <strong>whatsapp网页版登入</strong>，让办公效率得到质的飞跃。无论是 <strong>whatsapp在线登陆</strong> 的稳定性，还是 <strong>whatapp web</strong> 的易用性，都深受全球用户认可。</p>
-            
+           
             <h2>一、确保接入 whatsapp官方 安全渠道</h2>
             <p>目前网络中存在大量假冒的 <strong>whatapp web</strong> 页面，识别真正的 <strong>whatsapp官方网页版</strong> 至关重要。官方页面通过手机端的“关联设备”扫码完成，这种方式进行的 <strong>whatsapp在线登陆</strong>，能确保您的所有消息都在本地解密。如果您在 <strong>whatapp网页版登录</strong> 过程中遇到加载缓慢，建议检查网络环境。<strong>whats网页版登录</strong> 的安全性始终是用户关注的焦点。</p>
 
@@ -86,11 +78,9 @@ title: WhatsApp网页版登录官方入口 | whatsapp网页版登录
         </article>
     </main>
 
-    <!-- 🎯 右侧侧边栏卡片：完美修复样式名与内部标签结构 -->
     <aside class="sidebar-card">
         <h3 class="widget-title">最新动态更新</h3>
         <ul class="post-list">
-            <!-- 11ty 动态渲染列表页逻辑开始 -->
             {% set count = 0 %}
             {% for post in collections.blog | reverse %}
                 {% if count < 5 %}
@@ -102,17 +92,14 @@ title: WhatsApp网页版登录官方入口 | whatsapp网页版登录
             {% else %}
                 <li style="color: #999; padding: 10px; font-size: 14px;">暂无更新内容</li>
             {% endfor %}
-            <!-- 11ty 动态渲染列表页逻辑结束 -->
         </ul>
 
-        <!-- 查看更多更新按钮：完美内嵌于卡片底部 -->
         <div class="more-articles-sidebar-wrap">
             <a href="/blog/" class="more-articles-btn">查看更多更新 &raquo;</a>
         </div>
     </aside>
-</div> <!-- .home-container 完美在此闭合 -->
+</div>
 
-<!-- 页脚区域：独立出外部大框架，确保满宽白底排版对齐 -->
 <footer class="footer-links">
     <strong>推荐资源：</strong>
     <div class="link-group" id="random-links">
