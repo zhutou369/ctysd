@@ -12,70 +12,81 @@
     <meta name="description" content="{{ description or '提供专业的whatsapp网页版登录及官方安全通讯指南。' }}">
     
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #222; margin: 0; background: #fff; }
-        .wrapper { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
-        
-        /* 🎯 优化内页公共页头样式 */
-        header { border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 30px; }
-        .header-logo { text-decoration: none; color: #000; font-weight: 800; font-size: 20px; display: inline-block; }
-        
-        h1 { font-size: 32px; margin-bottom: 15px; color: #111; font-weight: bold; }
-        
-        .breadcrumb-nav { font-size: 14px; color: #888; margin-bottom: 25px; padding-bottom: 10px; border-bottom: 1px dashed #f0f0f0; }
-        .breadcrumb-nav a { color: #007aff; text-decoration: none; font-weight: 500; }
-        .breadcrumb-nav a:hover { text-decoration: underline; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #222; margin: 0; background: #fff; }\r
+        .wrapper { max-width: 800px; margin: 0 auto; padding: 40px 20px; }\r
+        \r
+        /* 🎯 优化内页公共页头样式 */\r
+        header { border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 30px; }\r
+        .header-logo { text-decoration: none; color: #000; font-weight: 800; font-size: 20px; display: inline-block; }\r
+        \r
+        h1 { font-size: 32px; margin-bottom: 15px; color: #111; line-height: 1.3; }\r
+        .breadcrumb-nav { font-size: 14px; color: #666; margin-bottom: 30px; padding-bottom: 10px; }\r
+        .breadcrumb-nav a { color: #0066cc; text-decoration: none; }\r
+        .breadcrumb-nav a:hover { text-decoration: underline; }\r
+        \r
+        /* 文章正文样式 */\r
+        .content { font-size: 16px; color: #333; line-height: 1.8; }\r
+        .content h2 { font-size: 22px; margin-top: 35px; margin-bottom: 15px; color: #111; border-bottom: 1px solid #f0f0f0; padding-bottom: 5px; }\r
+        .content h3 { font-size: 18px; margin-top: 25px; margin-bottom: 12px; color: #222; }\r
+        .content p { margin-bottom: 20px; text-align: justify; }\r
+        .content ul, .content ol { padding-left: 20px; margin-bottom: 20px; }\r
+        .content li { margin-bottom: 8px; }\r
+        .content img { max-width: 100%; height: auto; display: block; margin: 25px auto; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }\r
+        \r
+        /* 🎯 上一篇下一篇结构化导航样式 */\r
+        .post-nav { display: flex; justify-content: space-between; margin: 40px 0; padding: 20px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; font-size: 15px; gap: 20px; }\r
+        .post-nav div { flex: 1; }\r
+        .post-nav .nav-next { text-align: right; }\r
+        .post-nav a { color: #0066cc; text-decoration: none; font-weight: 500; }\r
+        .post-nav a:hover { text-decoration: underline; }\r
+        \r
+        /* 页脚与友情链接 */\r
+        .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid #eee; font-size: 14px; color: #666; }\r
+        .friend-links { margin-bottom: 20px; }\r
+        .friend-links a { color: #555; text-decoration: none; margin-right: 15px; display: inline-block; }\r
+        .friend-links a:hover { color: #0066cc; text-decoration: underline; }\r
+        .copyright { color: #999; font-size: 13px; }\r
+    </style>\r
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>\r
+    <script>LA.init({id:"3K7l95Zodr0uFrIN",ck:"3K7l95Zodr0uFrIN"})</script>\r
+</head>\r
+<body>\r
+    \r
+    {%- set prevPost = collections.posts | getPreviousCollectionItem(page) %}\r
+    {%- set nextPost = collections.posts | getNextCollectionItem(page) %}\r
+\r
+    <div class="wrapper">\r
+        <header><a href="/" class="header-logo">QHSDK 通讯中心</a></header>\r
+        \r
+        <article>\r
+            <h1>{{ title }}</h1>\r\n            \r\n            <div class="breadcrumb-nav">\r
+                当前位置：<a href="/">首页入口</a> &gt; <a href="/blog/">文章列表页</a> &gt; 正文内容\r
+            </div>\r
+\r
+            <div class="content">\r
+                {{ content | safe }}\r
+            </div>\r
+        </article>\r\n\r\n        \r
+        <nav class="post-nav">\r
+            <div class="nav-prev">\r
+                {% if prevPost %}<a href="{{ prevPost.url }}">← {{ prevPost.data.title }}</a>{% endif %}\r
+            </div>\r
+            <div class="nav-next">\r
+                 {% if nextPost %}<a href="{{ nextPost.url }}">{{ nextPost.data.title }} →</a>{% endif %}\r
+            </div>\r
+        </nav>\r\n\r\n        <footer class="footer">\r
+            <div class="friend-links">\r
+                <strong>推荐资源：</strong>\r
+                <a href="https://qhqrl.com">whatsapp網頁版下载</a>\r
+                <a href="https://ctysd.cn">whatsapp网页版登录</a>\r
+                <a href="https://qvfdc.com/">whatsapp官方</a>\r
+                <a href="https://rcqry.com/">whatsapp网页版</a>\r
+                <a href="https://rdqjm.com/">whatsapp网页版</a>\r
 
-        .content { font-size: 17px; color: #333; }
-        .content h2 { font-size: 24px; margin-top: 40px; border-bottom: 2px solid #eee; padding-bottom: 5px; }
-        .content p { margin-bottom: 20px; }
-
-        .post-nav { display: flex; justify-content: space-between; border-top: 1px solid #eee; margin-top: 50px; padding-top: 30px; }
-        .post-nav a { text-decoration: none; color: #007aff; font-weight: 500; font-size: 15px; }
-        .post-nav a:hover { text-decoration: underline; }
-
-        .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid #eee; font-size: 13px; color: #888; text-align: center; }
-        .friend-links { margin-top: 20px; }
-        .friend-links a { margin: 0 8px; color: #999; text-decoration: none; }
-    </style>
-    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
-    <script>LA.init({id:"3K7l95Zodr0uFrIN",ck:"3K7l95Zodr0uFrIN"})</script>
-</head>
-<body>
-    <div class="wrapper">
-        <header><a href="/" class="header-logo">QHSDK 通讯中心</a></header>
-        
-        <article>
-            <h1>{{ title }}</h1>
-            
-            <div class="breadcrumb-nav">
-                当前位置：<a href="/">首页入口</a> &gt; <a href="/blog/">文章列表页</a> &gt; 正文内容
-            </div>
-
-            <div class="content">
-                {{ content | safe }}
-            </div>
-        </article>
-
-        <nav class="post-nav">
-            <div>
-                {% if prevPost %}<a href="{{ prevPost.url }}">← {{ prevPost.data.title }}</a>{% endif %}
-            </div>
-            <div>
-                 {% if nextPost %}<a href="{{ nextPost.url }}">{{ nextPost.data.title }} →</a>{% endif %}
-            </div>
-        </nav>
-
-        <footer class="footer">
-            <div class="friend-links">
-                <strong>推荐资源：</strong>
-                <a href="https://qhqrl.com">whatsapp網頁版下载</a>
-                <a href="https://ctysd.cn">whats网页版登入</a>
-                <a href="https://qvfdc.com">WhatsApp 網頁版</a>
-                <a href="https://rcqry.com">whatapp web</a>
-                <a href="https://rdqjm.com">whatsapp在线登陆</a>
-            </div>
-            <p>&copy; 2026 whatapp web</p>
-        </footer>
-    </div>
-</body>
+            <div class="copyright">\r
+                &copy; 2026 QHSDK 通讯中心. 保留所有权利。\r
+            </div>\r
+        </footer>\r
+    </div>\r
+</body>\r
 </html>
