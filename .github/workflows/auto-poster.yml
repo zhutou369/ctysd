@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # 1. 檢出 11ty 項目的全部源碼
+    # 1. 檢出 11ty 項目的全部源碼（🌟 修复：将 fetch-depth 设为 0，获取完整历史树防止 ref 锁死）
     - name: Checkout Repository
       uses: actions/checkout@v4
       with:
@@ -67,7 +67,7 @@ jobs:
         npx @11ty/eleventy
         echo "✅ Eleventy 静态网站编译成功！"
 
-    # 6. 檢查是否有新文章誕生，第一時間暴力推回 GitHub 主網触发线上托管商编译
+    # 6. 🌟【核心修复步骤】智能同步拉取，解决并发导致的 Ref Lock 冲突 🌟
     - name: Commit and Push Changes back to Repo
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -79,7 +79,12 @@ jobs:
         
         if ! git diff --cached --quiet; then
           git commit -m "🤖 [Bot] 自動同步/手動測試：更新文章並同步詞庫"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main -f
+          
+          # 🔄 关键修复：推送前先通过 rebase 拉取远程可能存在的新提交，理顺版本线
+          git pull origin main --rebase
+          
+          # 🚀 安全推送至远程 main 分支
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
           echo "✅ 成功將新文章與更新後的詞庫同步回 GitHub 遠端倉庫！"
         else
           echo "⚠️ 檢查發現本地文件無任何変化，本次自動跳過源碼推送。"
@@ -157,8 +162,8 @@ jobs:
         echo '  req.write(requestData);' >> bing-instant-push.js
         echo '  req.end();' >> bing-instant-push.js
         echo '} catch (err) {' >> bing-instant-push.js
-        echo '  console.error("❌ 自动化推送运行出错:", err);' >> bing-instant-push.js
-        echo '}' >> bing-instant-push.js
+        echo '  console.error("❌ 自动化推送运行出错:", err);' >> sig-instant-push.js
+        echo '}'
         
         # 完美执行
         node bing-instant-push.js
